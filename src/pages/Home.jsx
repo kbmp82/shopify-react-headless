@@ -1,22 +1,21 @@
 import React, { useContext, useEffect } from "react";
 import { ShopContext } from "../context/shopContext";
 import { Link } from "react-router-dom";
-import { Box, Grid, Text, Image, Container  } from "@chakra-ui/react";
+import { Box, Grid, Text, Image  } from "@chakra-ui/react";
 
 const Home = () => {
   const { fetchAllProducts, products } = useContext(ShopContext);
 
   useEffect(() => {
     fetchAllProducts();
-  }, [fetchAllProducts]);
+  }, []);
 
   if (!products) return <div>Loading...</div>;
 
   return (
-    <Box maxW='1280px' mx="auto">
+    <Box maxW='1280px'  mx="auto">
       <Grid templateColumns="repeat(3,1fr)">
         {products.map((product) => {
-          console.log(product);
           return (
             <Link key={product.id} to={`/products/${product.handle}`}>
               <Box _hover={{ opacity: "80%" }} textAlign="center">

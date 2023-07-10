@@ -4,20 +4,22 @@ import ProductPage from "./pages/ProductPage";
 import { Route, Switch } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Cart from "./components/Cart";
 
 function App() {
   return (
     <div className="App">
       <Header />
-        <Switch>
-          <Route path="/" exact>
-            <Home />
-          </Route>
-          <Route path="/products/:handle">
-            <ProductPage />
-          </Route>
-        </Switch>
-        <Footer />
+      <Cart />
+      <Switch>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+        <Route path="/products/:handle">
+          <ProductPage />
+        </Route>
+      </Switch>
+      <Footer />
     </div>
   );
 }
