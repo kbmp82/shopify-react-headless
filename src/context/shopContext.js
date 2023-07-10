@@ -9,9 +9,10 @@ const ShopContext = React.createContext();
 const client = Client.buildClient({
     domain:  process.env.REACT_APP_SHOPIFY_DOMAIN,
     storefrontAccessToken: process.env.REACT_APP_SHOPIFY_ACCESS_TOKEN
-  });
+  })
+ 
   
-export default class ShopProvider extends Component {
+class ShopProvider extends Component {
 
     state = {
         product: {},
@@ -30,9 +31,14 @@ export default class ShopProvider extends Component {
     }
 
     createCheckout = async () => {
+        try{
         const checkout = await client.checkout.create();
-          localStorage.setItem("checkoutId", checkout.id);
-          this.setState({checkout});
+         localStorage.setItem("checkoutId", checkout.id);
+         this.setState({checkout});
+        }
+        catch(error){
+            console.log("error", error);
+        }
     }
 
     fetchCheckout = async (checkoutId) => {
@@ -69,7 +75,14 @@ export default class ShopProvider extends Component {
     
     render(){
         return(
-           <ShopContext.Provider>
+           <ShopContext.Provider value={{...this.state, 
+            fetchAllProducts: this.fetchAllProducts,
+            fetchProductWithHandle: this.fetchProductWithHandle,
+            toggleCart: this.toggleCart,
+            toggleMenu: this.toggleMenu,
+            addItemToCheckout: this.addItemToCheckout,
+            removeLineItem: this.removeLineItem
+           }}>
             {this.props.children}
            </ShopContext.Provider>
         )
@@ -78,4 +91,6 @@ export default class ShopProvider extends Component {
 
 const ShopConsumer = ShopContext.Consumer;
 
-export {ShopConsumer, ShopContext}
+export {ShopConsumer, ShopContext }
+
+export default ShopProvider
