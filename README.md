@@ -1,7 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+## Headless Shopify store using Shopify API, React Hooks, Context, and Chakra UI
 ## Available Scripts
 
 In the project directory, you can run:
